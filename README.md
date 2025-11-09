@@ -159,3 +159,11 @@ GenVis/
 ## Summary
 
 GenVis streamlines product ideation, requirement drafting, and executive reporting by connecting AI-generated insights directly to enterprise tools like **Jira** and **Slack**. Initially tailored for PNC’s product workflow, GenVis scales to any organization seeking **AI-assisted product delivery**, demonstrating **multi-step reasoning, workflow orchestration, and integration** as envisioned in HackUTD 2025’s challenges.
+
+---
+
+## Contributors
+
+- **Isaac Pandyan** – Backend & Frontend  
+- **Krish Patel** – Backend & Frontend  
+- **Razeen Rahman** – Backend & Frontend
