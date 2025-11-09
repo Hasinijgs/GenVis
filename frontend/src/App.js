@@ -134,9 +134,9 @@ function App() {
   const MarketMetrics = ({ data }) => {
     if (!data) return null;
     const entries = [
-      { label: 'TAM', value: data.tam },
-      { label: 'SAM', value: data.sam },
-      { label: 'SOM', value: data.som },
+      { label: 'Total Addressable Market (TAM)', value: data.tam },
+      { label: 'Serviceable Available Market (SAM)', value: data.sam },
+      { label: 'Serviceable Obtainable Market (SOM)', value: data.som },
     ].filter((m) => m.value);
 
     if (!entries.length) return null;
@@ -144,7 +144,7 @@ function App() {
     return (
       <div className="metrics-grid compact">
         {entries.map((metric) => (
-          <div key={metric.label} className="metric-card">
+          <div key={metric.label} className="metric-card market-card">
             <h4>{metric.label}</h4>
             <p className="metric-value">{metric.value}</p>
           </div>
@@ -157,14 +157,28 @@ function App() {
     <div className="App">
       <header className="header">
         <div className="brand">
-          <img src={GenVisLogo} alt="GenVis logo" className="logo-image" />
-          <div>
+          <div className="brand-top">
+            <img src={GenVisLogo} alt="GenVis logo" className="logo-image" />
             <h1>GenVis</h1>
-            <p>Generative Vision Product Manager Studio</p>
           </div>
+          <p className="brand-tagline">Generative Vision Product Manager Studio</p>
         </div>
-        <span className="badge">PNC × NVIDIA Innovation Sprint</span>
+        <span className="badge">PNC × NVIDIA HackUTD 2025</span>
       </header>
+      <div className="integration-status-strip">
+        <div className="status-item">
+          <p className="status-title">Jira Connected</p>
+          <p className="status-subtitle">3 projects synced</p>
+        </div>
+        <div className="status-item">
+          <p className="status-title">Slack Ready</p>
+          <p className="status-subtitle">#product-updates</p>
+        </div>
+        <div className="status-item">
+          <p className="status-title">Vision Insights Active</p>
+          <p className="status-subtitle">Nemotron-nano-9B v2</p>
+        </div>
+      </div>
 
       <nav className="top-nav">
         <div className="top-nav-inner">
@@ -209,11 +223,14 @@ function App() {
         <main className="content">
           {error && <div className="alert error"> {String(error)}</div>}
 
-          {// IDEATION }
+          {/* IDEATION */}
           {activeTab === 'ideation' && (
             <div className="workflow-content">
               <h2>Product Ideation Assistant</h2>
-              <p>Generate product ideas, pain points, and customer personas using AI-powered brainstorming.</p>
+              <p>
+                Generate product ideas, pain points, and customer personas with AI, then turn them into
+                actionable insights for requirements and Jira planning.
+              </p>
 
               <form onSubmit={handleIdeation} className="form">
                 <div className="form-row">
@@ -221,7 +238,7 @@ function App() {
                     <label>Industry</label>
                     <input
                       type="text"
-                      placeholder="e.g., FinTech, Healthcare, EdTech"
+                      placeholder="e.g., Banking, FinTech, Retail"
                       value={industry}
                       onChange={(e) => setIndustry(e.target.value)}
                       required
@@ -231,7 +248,7 @@ function App() {
                     <label>Problem Area</label>
                     <input
                       type="text"
-                      placeholder="e.g., Payment Processing, Patient Records"
+                      placeholder="e.g., Customer Onboarding, Fraud Detection"
                       value={problemArea}
                       onChange={(e) => setProblemArea(e.target.value)}
                       required
@@ -316,11 +333,14 @@ function App() {
             </div>
           )}
 
-          {// REQUIREMENTS}
+          {/* REQUIREMENTS */}
           {activeTab === 'requirements' && (
             <div className="workflow-content">
               <h2>Requirements Generator</h2>
-              <p>Generate user stories and acceptance criteria with AI assistance.</p>
+              <p>
+                Automate product planning by generating user stories and acceptance criteria with AI.
+                Instantly sync them to Jira as backlog tasks for your development workflow.
+              </p>
 
               <form onSubmit={handleRequirements} className="form">
                 <div className="form-row">
@@ -328,7 +348,7 @@ function App() {
                     <label>Feature Name</label>
                     <input
                       type="text"
-                      placeholder="e.g., Automated Report Generation"
+                      placeholder="e.g., Budget Analytics Dashboard"
                       value={featureName}
                       onChange={(e) => setFeatureName(e.target.value)}
                       required
@@ -411,14 +431,17 @@ function App() {
           {activeTab === 'reporting' && (
             <div className="workflow-content">
               <h2>Sprint Reporting</h2>
-              <p>Generate executive summaries and stakeholder updates automatically.</p>
+              <p>
+                Generate executive summaries and stakeholder updates automatically. Instantly push reports
+                directly to Slack for team visibility and streamlined sprint communication.
+              </p>
 
               <form onSubmit={handleReport} className="form">
                 <div className="form-group">
                   <label>Sprint Name</label>
                   <input
                     type="text"
-                    placeholder="e.g., Sprint 24 - Q1 2025"
+                    placeholder="e.g., Sprint 12 – AI Assistant Integration"
                     value={sprintName}
                     onChange={(e) => setSprintName(e.target.value)}
                     required
@@ -514,7 +537,13 @@ function App() {
           <span>Contact: <a href="mailto:genvis2025@gmail.com">genvis2025@gmail.com</a></span>
         </div>
         <div className="footer-actions">
-          <a href="#" className="utility-icon" aria-label="GenVis GitHub repository">
+          <a
+            href="https://github.com/razeenr05/GenVis"
+            className="utility-icon"
+            aria-label="GenVis GitHub repository"
+            target="_blank"
+            rel="noreferrer"
+          >
             <Github size={18} />
           </a>
         </div>
