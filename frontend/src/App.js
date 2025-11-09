@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Brain, FileText, BarChart3, Loader2, Github } from 'lucide-react';
 import './App.css';
@@ -19,6 +19,7 @@ function App() {
   const [targetPersona, setTargetPersona] = useState('');
   const [sprintName, setSprintName] = useState('');
   const [completedItems, setCompletedItems] = useState('');
+  const [integrationStatus, setIntegrationStatus] = useState(null);
 
   // Handlers
   const handleIdeation = async (e) => {
@@ -153,6 +154,50 @@ function App() {
     );
   };
 
+  const tabs = [
+    { key: 'ideation', icon: <Brain size={18} />, label: 'Ideation' },
+    { key: 'requirements', icon: <FileText size={18} />, label: 'Requirements' },
+    { key: 'reporting', icon: <BarChart3 size={18} />, label: 'Reporting' },
+  ];
+
+  const activeTabLabel = tabs.find((tab) => tab.key === activeTab)?.label || 'Ideation';
+
+  useEffect(() => {
+    let mounted = true;
+    const fetchStatus = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/activity`);
+        if (mounted) {
+          setIntegrationStatus(response.data.data || response.data);
+        }
+      } catch {
+        if (mounted) {
+          setIntegrationStatus(null);
+        }
+      }
+    };
+    fetchStatus();
+    const interval = setInterval(fetchStatus, 15000);
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+    };
+  }, []);
+
+  const formatTime = (timestamp) => {
+    if (!timestamp) return null;
+    try {
+      return new Date(timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    } catch {
+      return timestamp;
+    }
+  };
+
+  const statusData = integrationStatus || {};
+  const jiraStatus = statusData.jira || {};
+  const slackStatus = statusData.slack || {};
+  const insightStatus = statusData.insights || {};
+
   return (
     <div className="App">
       <header className="header">
@@ -168,25 +213,33 @@ function App() {
       <div className="integration-status-strip">
         <div className="status-item">
           <p className="status-title">Jira Connected</p>
-          <p className="status-subtitle">3 projects synced</p>
+          <p className="status-subtitle">
+            {jiraStatus.last_sync
+              ? `Last sync ${formatTime(jiraStatus.last_sync)} • ${jiraStatus.total_synced || 0} total issues`
+              : 'Awaiting first sync'}
+          </p>
         </div>
         <div className="status-item">
           <p className="status-title">Slack Ready</p>
-          <p className="status-subtitle">#product-updates</p>
+          <p className="status-subtitle">
+            {slackStatus.last_post
+              ? `Posted ${formatTime(slackStatus.last_post)}`
+              : `Channel ${slackStatus.channel || '#product-updates'}`}
+          </p>
         </div>
         <div className="status-item">
           <p className="status-title">Vision Insights Active</p>
-          <p className="status-subtitle">Nemotron-nano-9B v2</p>
+          <p className="status-subtitle">
+            {insightStatus.updated_at
+              ? `Updated ${formatTime(insightStatus.updated_at)}`
+              : 'Waiting for first run'}
+          </p>
         </div>
       </div>
 
       <nav className="top-nav">
         <div className="top-nav-inner">
-          {[
-            { key: 'ideation', icon: <Brain size={18} />, label: 'Ideation' },
-            { key: 'requirements', icon: <FileText size={18} />, label: 'Requirements' },
-            { key: 'reporting', icon: <BarChart3 size={18} />, label: 'Reporting' },
-          ].map(({ key, icon, label }) => (
+          {tabs.map(({ key, icon, label }) => (
             <button
               key={key}
               type="button"
@@ -208,15 +261,36 @@ function App() {
         <section className="integration-banner">
           <div className="integration-card">
             <p>Jira Sync</p>
-            <strong>Connected</strong>
+            <strong>
+              {jiraStatus.last_sync ? `Synced ${formatTime(jiraStatus.last_sync)}` : 'Awaiting sync'}
+            </strong>
+            <span className="integration-subtext">
+              {`${jiraStatus.new_stories || 0} new • ${jiraStatus.total_synced || 0} total • ${
+                jiraStatus.completed_items || 0
+              } done`}
+            </span>
           </div>
           <div className="integration-card">
             <p>Slack Broadcast</p>
-            <strong>Ready</strong>
+            <strong>
+              {slackStatus.last_post ? `Posted ${formatTime(slackStatus.last_post)}` : 'Ready to post'}
+            </strong>
+            <span className="integration-subtext">
+              {slackStatus.last_summary
+                ? `"${slackStatus.last_summary}"`
+                : `Channel ${slackStatus.channel || '#product-updates'}`}
+            </span>
           </div>
           <div className="integration-card">
             <p>Vision Insights</p>
-            <strong>Online</strong>
+            <strong>
+              {insightStatus.updated_at ? `Updated ${formatTime(insightStatus.updated_at)}` : 'No runs yet'}
+            </strong>
+            <span className="integration-subtext">
+              {`${insightStatus.pain_points || 0} pain points • ${insightStatus.product_ideas || 0} ideas • ${
+                insightStatus.user_stories || 0
+              } stories`}
+            </span>
           </div>
         </section>
 
