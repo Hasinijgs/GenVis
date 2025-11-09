@@ -1,4 +1,3 @@
-````markdown
 # GenVis
 ## Short for Generative Vision (Genius)
 ## A Nemotron AI-Powered Product Management Assistant
@@ -56,12 +55,15 @@ Originally built for **PNC Bank’s Product Innovation Challenge** at **HackUTD 
 ## Local Setup
 
 ### 1. Clone the repository
+Run the following commands in your terminal:
+
 ```bash
 git clone https://github.com/razeenr05/GenVis.git
 cd GenVis
-````
+```
 
 ### 2. Backend Setup
+Set up the backend environment and install dependencies:
 
 ```bash
 cd backend
@@ -72,7 +74,7 @@ venv\Scripts\activate    # Windows
 pip install -r requirements.txt
 ```
 
-Create `backend/.env` from `.env.example`:
+Create `backend/.env` from `.env.example` and configure your keys:
 
 ```env
 # Nemotron
@@ -104,6 +106,7 @@ uvicorn mock_api:app --reload
 Backend runs at `http://127.0.0.1:8000`.
 
 ### 3. Frontend Setup
+Set up the frontend and start the app:
 
 ```bash
 cd ../frontend
@@ -156,4 +159,3 @@ GenVis/
 ## Summary
 
 GenVis streamlines product ideation, requirement drafting, and executive reporting by connecting AI-generated insights directly to enterprise tools like **Jira** and **Slack**. Initially tailored for PNC’s product workflow, GenVis scales to any organization seeking **AI-assisted product delivery**, demonstrating **multi-step reasoning, workflow orchestration, and integration** as envisioned in HackUTD 2025’s challenges.
-
