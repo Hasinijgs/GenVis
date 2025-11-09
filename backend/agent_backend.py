@@ -169,8 +169,8 @@ class GenVisAgent:
 You are GenVis, an AI Product Manager.
 Respond with a single valid JSON object (no markdown, no commentary) containing:
 - reasoning_trace: 5 detailed steps explaining how you approached the ideation (full sentences)
-- pain_points: 5 richly written bullet strings (2–3 sentences each). Prefix each with its index like "1. ..."
-- product_ideas: 5 objects with name, description (<= 420 chars, emphasize benefits), key_features (array of 4 strings), pain_points_addressed (array of indexes referencing pain_points, 1-indexed)
+- pain_points: exactly 3 richly written bullet strings (2–3 sentences each). Prefix each with its index like "1. ..."
+- product_ideas: exactly 3 objects with name, description (<= 420 chars, emphasize benefits), key_features (array of 4 strings), pain_points_addressed (array of indexes referencing pain_points, 1-indexed)
 - personas: 3 objects with name, role, goals, frustrations, motivations, preferred_channels
 - market_opportunity: object with tam, sam, som, cagr, strategic_insight (strings with context)
 Write professional, persuasive copy. Context: industry="{industry}", problem_area="{problem_area}".
@@ -192,7 +192,7 @@ Write professional, persuasive copy. Context: industry="{industry}", problem_are
 You are GenVis generating requirements.
 Respond with a single valid JSON object (no markdown, no commentary) for feature="{feature_name}" and persona="{target_persona}" including:
 - reasoning_trace: 5 concise but descriptive steps (full sentences)
-- user_stories: 4 stories each containing title, description (<= 280 chars), acceptance_criteria (array of 4 bullet sentences), story_points (number), dependencies (array up to 3 items), business_value (string), risks (string)
+- user_stories: exactly 3 stories each containing title, description (<= 280 chars), acceptance_criteria (array of 4 bullet sentences), story_points (number), dependencies (array up to 3 items), business_value (string), risks (string)
 Keep content implementation-ready with clear detail.
 """
         ai_response = nemotron_generate(prompt, max_tokens=2000)
